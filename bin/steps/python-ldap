@@ -1,7 +1,7 @@
 # Install python-ldap requirements
 puts-step "Installing python-ldap requirements"
 
-BERKLEY_DB_VERSION=6.1.19
+BERKLEY_DB_VERSION=5.3.15
 BERKLEY_DB_URL=http://download.oracle.com/berkeley-db/db-${BERKLEY_DB_VERSION}.NC.tar.gz
 
 OPENLDAP_VERSION=2.4.40
