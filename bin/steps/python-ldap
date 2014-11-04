@@ -79,9 +79,9 @@ cp -R $CACHE_DIR/.python-ldap/lib-openldap $BUILD_DIR/.python-ldap/lib-openldap
 echo "Open LDAP enabled."
 ls -al $BUILD_DIR/.python-ldap
 
-export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib:$BUILD_DIR/.python-ldap/lib-openldap/lib:/usr/local/ssl/lib"
-export LDFLAGS="-L/usr/local/lib -L$BUILD_DIR/.python-ldap/lib-openldap/lib -L/usr/local/ssl/lib"
-export CPPFLAGS="-I/usr/local/include -I$BUILD_DIR/.python-ldap/lib-openldap/include -I/usr/local/ssl/include"
+#export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib:$BUILD_DIR/.python-ldap/lib-openldap/lib:/usr/local/ssl/lib"
+#export LDFLAGS="-L/usr/local/lib -L$BUILD_DIR/.python-ldap/lib-openldap/lib -L/usr/local/ssl/lib"
+#export CPPFLAGS="-I/usr/local/include -I$BUILD_DIR/.python-ldap/lib-openldap/include -I/usr/local/ssl/include"
 
 #####
 mkdir tmpdir
