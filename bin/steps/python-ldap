@@ -84,7 +84,7 @@ if [ -n "$PYTHON_LDAP_VERSION" ]; then
     pip install -d tmpdir python-ldap==${PYTHON_LDAP_VERSION}
 else
     pip install -d tmpdir python-ldap
-    PYTHON_LDAP_VERSION=`ls -al tmpdir | grep python-ldap | sed 's/python-ldap-\(.*\)\.tar\.gz/\1/g'`
+    PYTHON_LDAP_VERSION=`ls tmpdir | grep python-ldap | sed 's/python-ldap-\(.*\)\.tar\.gz/\1/g'`
 fi
 cd tmpdir
 tar -zxvf python-ldap-${PYTHON_LDAP_VERSION}.tar.gz > /dev/null
