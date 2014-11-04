@@ -96,8 +96,8 @@ cd tmpdir
 tar -zxvf python-ldap-${PYTHON_LDAP_VERSION}.tar.gz > /dev/null
 cd python-ldap-${PYTHON_LDAP_VERSION}
 cat setup.cfg
-sed -i "s#library_dirs = \(.*\)#library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1#g" setup.cfg
-sed -i "s#include_dirs = \(.*\)#include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1#g" setup.cfg
+sed -i "s#library_dirs = \(.*\)#library_dirs = $BUILD_DIR/.python-ldap/lib-openldap/lib \1#g" setup.cfg
+sed -i "s#include_dirs = \(.*\)#include_dirs = $BUILD_DIR/.python-ldap/lib-openldap/include \1#g" setup.cfg
 cat setup.cfg
 pip install -U .
 cd ../..
