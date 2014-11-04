@@ -13,6 +13,8 @@ OPENLDAP_URL=http://www.openldap.org/software/download/OpenLDAP/openldap-release
 mkdir -p $CACHE_DIR/.python-ldap
 mkdir -p $BUILD_DIR/.python-ldap
 
+ls -al $CACHE_DIR/.python-ldap
+
 if [ ! -d $CACHE_DIR/.python-ldap/lib-groff ]; then
     echo "Downloading Groff ${GROFF_VERSION} ..." | indent
     curl -s -L -o groff.tar.gz $GROFF_URL
@@ -22,11 +24,12 @@ if [ ! -d $CACHE_DIR/.python-ldap/lib-groff ]; then
     mv groff-${GROFF_VERSION} $CACHE_DIR/.python-ldap/groff
     echo "Configuring ..." | indent
     cd $CACHE_DIR/.python-ldap/groff
-    ./configure --prefix=$CACHE_DIR/.python-ldap/lib-groff
+    ./configure --prefix=$CACHE_DIR/.python-ldap/lib-groff > /dev/null
     echo "Compiling ..." | indent
-    make PROCESSEDEXAMPLEFILES=""
+    make PROCESSEDEXAMPLEFILES="" > /dev/null
     echo "Installing ..." | indent
-    make PROCESSEDEXAMPLEFILES="" install
+    make PROCESSEDEXAMPLEFILES="" install > /dev/null
+    cd - > /dev/null
 fi
 cp -R $CACHE_DIR/.python-ldap/lib-groff $BUILD_DIR/.python-ldap/lib-groff
 export PATH=${BUILD_DIR}/.python-ldap/lib-groff/bin:${PATH}
@@ -34,7 +37,7 @@ echo "Groff enabled." | indent
 
 
 if [ ! -d $CACHE_DIR/.python-ldap/lib-berkleydb ]; then
-    echo "Downloading BerkleyDB ${BERKLEY_DB_VERSION}" | indent
+    echo "Downloading BerkleyDB ${BERKLEY_DB_VERSION} ..." | indent
     curl -s -L -o berkleydb.tar.gz $BERKLEY_DB_URL
     echo "Unpacking ..." | indent
     tar -zxvf berkleydb.tar.gz > /dev/null
@@ -47,6 +50,7 @@ if [ ! -d $CACHE_DIR/.python-ldap/lib-berkleydb ]; then
     make > /dev/null
     echo "Installing ..." | indent
     make install > /dev/null
+    cd - > /dev/null
 fi
 cp -R $CACHE_DIR/.python-ldap/lib-berkleydb $BUILD_DIR/.python-ldap/lib-berkleydb
 export LD_LIBRARY_PATH="$BUILD_DIR/.python-ldap/lib-berkleydb/lib:${LD_LIBRARY_PATH}"
@@ -62,12 +66,13 @@ if [ ! -d $CACHE_DIR/.python-ldap/lib-openldap ]; then
     mv openldap-${OPENLDAP_VERSION} $CACHE_DIR/.python-ldap/openldap
     echo "Configuring ..." | indent
     cd $CACHE_DIR/.python-ldap/openldap
-    LDFLAGS="-L$BUILD_DIR/.python-ldap/lib-berkleydb/lib ${LDFLAGS}" CPPFLAGS="-I$BUILD_DIR/.python-ldap/lib-berkleydb/include ${CPPFLAGS}" ./configure --enable-bdb --enable-crypt --with-tls=openssl --prefix=$CACHE_DIR/.python-ldap/lib-openldap
+    LDFLAGS="-L$BUILD_DIR/.python-ldap/lib-berkleydb/lib ${LDFLAGS}" CPPFLAGS="-I$BUILD_DIR/.python-ldap/lib-berkleydb/include ${CPPFLAGS}" ./configure --enable-bdb --enable-crypt --with-tls=openssl --prefix=$CACHE_DIR/.python-ldap/lib-openldap > /dev/null
     echo "Compiling ..." | indent
-    make depend
-    make
+    make depend > /dev/null
+    make > /dev/null
     echo "Installing ..." | indent
-    make install
+    make install > /dev/null
+    cd - > /dev/null
 fi
 cp -R $CACHE_DIR/.python-ldap/lib-openldap $BUILD_DIR/.python-ldap/lib-openldap
 #here some library path export?
