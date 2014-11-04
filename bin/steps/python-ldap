@@ -75,7 +75,13 @@ fi
 cp -R $CACHE_DIR/.python-ldap/lib-openldap $BUILD_DIR/.python-ldap/lib-openldap
 echo "Open LDAP enabled." | indent
 
+
+
 echo "Installing python-ldap ..." | indent
+
+export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib:$BUILD_DIR/.python-ldap/lib-openldap/lib:/usr/local/ssl/lib"
+export LDFLAGS="-L/usr/local/lib -L$BUILD_DIR/.python-ldap/lib-openldap/lib -L/usr/local/ssl/lib"
+export CPPFLAGS="-I/usr/local/include -I$BUILD_DIR/.python-ldap/lib-openldap/include -I/usr/local/ssl/include"
 
 PYTHON_LDAP_VERSION=`cat requirements.txt | grep python-ldap | awk -F '=' '{ print $3 }'`
 
@@ -89,9 +95,11 @@ fi
 cd tmpdir
 tar -zxvf python-ldap-${PYTHON_LDAP_VERSION}.tar.gz > /dev/null
 cd python-ldap-${PYTHON_LDAP_VERSION}
+cat setup.cfg
 sed -i "s#library_dirs = \(.*\)#library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1#g" setup.cfg
 sed -i "s#include_dirs = \(.*\)#include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1#g" setup.cfg
-pip install --upgrade .
+cat setup.cfg
+pip install -U .
 cd ../..
 rm -rf tmpdir
 
