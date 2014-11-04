@@ -10,8 +10,6 @@ BERKLEY_DB_URL=http://download.oracle.com/berkeley-db/db-${BERKLEY_DB_VERSION}.N
 OPENLDAP_VERSION=2.4.40
 OPENLDAP_URL=http://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz
 
-rm -rf $CACHE_DIR/.python-ldap
-
 mkdir -p $CACHE_DIR/.python-ldap
 mkdir -p $BUILD_DIR/.python-ldap
 
