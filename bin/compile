@@ -165,6 +165,9 @@ source $BIN_DIR/steps/pylibmc
 # Libffi support.
 source $BIN_DIR/steps/cryptography
 
+# Python-ldap package requirements
+source $BIN_DIR/steps/python-ldap
+
 # Install dependencies with Pip.
 source $BIN_DIR/steps/pip-install
 
