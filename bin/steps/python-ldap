@@ -13,6 +13,7 @@ OPENLDAP_URL=http://www.openldap.org/software/download/OpenLDAP/openldap-release
 rm -rf $CACHE_DIR/.python-ldap
 
 mkdir -p $CACHE_DIR/.python-ldap
+mkdir -p $BUILD_DIR/.python-ldap
 
 if [ ! -d $CACHE_DIR/.python-ldap/lib-groff ]; then
     echo "Downloading Groff ${GROFF_VERSION} ..." | indent
