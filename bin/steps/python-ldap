@@ -85,14 +85,16 @@ export CPPFLAGS="-I/usr/local/include -I$BUILD_DIR/.python-ldap/lib-openldap/inc
 
 pip install python-ldap
 #####
-#pip install -U --no-install python-ldap
-#cd build/python-ldap
-#cat setup.cfg
-#sed "s,library_dirs = \(.*\),library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1,g" setup.cfg > setup.cfg
-#sed "s,include_dirs = \(.*\),include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1,g" setup.cfg > setup.cfg
-#cat setup.cfg
-#pip install -U .
-#cd ../..
+pip install -d tmpdir python-ldap
+cd tmpdir
+tar -zxvf python-ldap-2.4.18.tar.gz
+cd python-ldap-2.4.18
+cat setup.cfg
+sed "s,library_dirs = \(.*\),library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1,g" setup.cfg > setup.cfg
+sed "s,include_dirs = \(.*\),include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1,g" setup.cfg > setup.cfg
+cat setup.cfg
+pip install -U .
+cd ../..
 ######
 
 
