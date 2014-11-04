@@ -31,7 +31,7 @@ if [ ! -d $CACHE_DIR/.python-ldap/lib-groff ]; then
     make PROCESSEDEXAMPLEFILES="" install
 fi
 cp -R $CACHE_DIR/.python-ldap/lib-groff $BUILD_DIR/.python-ldap/lib-groff
-export PATH=${$BUILD_DIR}/.python-ldap/lib-groff/bin:${PATH}
+export PATH=${BUILD_DIR}/.python-ldap/lib-groff/bin:${PATH}
 echo "Groff enabled." | indent
 
 
