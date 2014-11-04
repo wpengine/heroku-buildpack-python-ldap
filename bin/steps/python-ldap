@@ -20,11 +20,21 @@ if [ ! -d $CACHE_DIR/.python-ldap ]; then
     mv db-${BERKLEY_DB_VERSION}.NC $CACHE_DIR/.python-ldap/berkleydb
     echo "Configuring ..." | indent
     cd $CACHE_DIR/.python-ldap/berkleydb/build_unix
-    ../dist/configure --prefix=$CACHE_DIR/.python-ldap/lib-berkleydb
+    ../dist/configure --prefix=$CACHE_DIR/.python-ldap/lib-berkleydb > /dev/null
     echo "Compiling ..." | indent
-    make
+    make > /dev/null
     echo "Installing ..." | indent
-    make install
+    make install > /dev/null
+    
+    echo $LD_LIBRARY_PATH
+    echo $LDFLAGS
+    echo $CPPFLAGS
+    export LD_LIBRARY_PATH="$CACHE_DIR/.python-ldap/lib-berkleydb/lib:${LD_LIBRARY_PATH}"
+    export LDFLAGS="-L$CACHE_DIR/.python-ldap/lib-berkleydb/lib ${LDFLAGS}"
+    export CPPFLAGS="-I$CACHE_DIR/.python-ldap/lib-berkleydb/include ${CPPFLAGS}"
+    echo $LD_LIBRARY_PATH
+    echo $LDFLAGS
+    echo $CPPFLAGS
 
     echo "Downloading Open LDAP ${OPENLDAP_VERSION} ..." | indent
     curl -s -L -o openldap.tgz $OPENLDAP_URL
