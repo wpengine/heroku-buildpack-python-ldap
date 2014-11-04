@@ -15,7 +15,6 @@
 BUILD_DIR=$1
 
 # Exit early if app is clearly not Python.
-exit 1
 if [ ! -f $BUILD_DIR/requirements.txt ] && [ ! -f $BUILD_DIR/setup.py ]; then
   exit 1
 fi
