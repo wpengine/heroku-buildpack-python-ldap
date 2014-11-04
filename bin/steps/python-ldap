@@ -84,6 +84,7 @@ export LDFLAGS="-L/usr/local/lib -L$BUILD_DIR/.python-ldap/lib-openldap/lib -L/u
 export CPPFLAGS="-I/usr/local/include -I$BUILD_DIR/.python-ldap/lib-openldap/include -I/usr/local/ssl/include"
 
 #####
+mkdir tmpdir
 pip install -d tmpdir python-ldap
 cd tmpdir
 tar -zxvf python-ldap-2.4.18.tar.gz
