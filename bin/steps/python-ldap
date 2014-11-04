@@ -1,3 +1,50 @@
 # Install python-ldap requirements
 puts-step "Installing python-ldap requirements"
-apt-get install python-dev libldap2-dev libsasl2-dev libssl-dev
+
+BERKLEY_DB_VERSION=6.1.19
+BERKLEY_DB_URL=http://download.oracle.com/berkeley-db/db-${BERKLEY_DB_VERSION}.NC.tar.gz
+
+OPENLDAP_VERSION=2.4.40
+OPENLDAP_URL=http://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz
+
+rm -rf $CACHE_DIR/.python-ldap
+
+if [ ! -d $CACHE_DIR/.python-ldap ]; then
+    mkdir -p $CACHE_DIR/.python-ldap
+
+    echo "Downloading BerkleyDB ${BERKLEY_DB_VERSION}" | indent
+    curl -s -L -o berkleydb.tar.gz $BERKLEY_DB_URL
+    echo "Unpacking ..." | indent
+    tar -zxvf berkleydb.tar.gz > /dev/null
+    rm berkleydb.tar.gz
+    mv db-${BERKLEY_DB_VERSION}.NC $CACHE_DIR/.python-ldap/berkleydb
+    echo "Configuring ..." | indent
+    cd $CACHE_DIR/.python-ldap/berkleydb/build_unix
+    ../dist/configure --prefix=$CACHE_DIR/.python-ldap/lib-berkleydb
+    echo "Compiling ..." | indent
+    make
+    echo "Installing ..." | indent
+    make install
+
+    echo "Downloading Open LDAP ${OPENLDAP_VERSION} ..." | indent
+    curl -s -L -o openldap.tgz $OPENLDAP_URL
+    echo "Unpacking ..." | indent
+    tar -zxvf openldap.tgz > /dev/null
+    rm openldap.tgz
+    mv openldap-${OPENLDAP_VERSION} $CACHE_DIR/.python-ldap/openldap
+    echo "Configuring ..." | indent
+    cd $CACHE_DIR/.python-ldap/openldap
+    ./configure --enable-bdb --enable-crypt --with-tls=openssl --prefix=$CACHE_DIR/.python-ldap/lib-openldap
+    echo "Compiling ..." | indent
+    make depend
+    make
+    echo "Installing ..." | indent
+    make install
+fi
+
+echo "Copying compiled libraries" | indent
+cp -R $CACHE_DIR/.python-ldap $BUILD_DIR/.python-ldap
+echo "Changing library paths" | indent
+cd $BUILD_DIR/.python-ldap
+ls -al | indent
+echo "Installed" | indent
