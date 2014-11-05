@@ -82,8 +82,8 @@ pip install -d tmpdir python-ldap==2.4.17
 cd tmpdir
 tar -zxvf python-ldap-2.4.17.tar.gz > /dev/null
 cd python-ldap-2.4.17
-sed "s,library_dirs = \(.*\),library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1,g" setup.cfg > setup.cfg
-sed "s,include_dirs = \(.*\),include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1,g" setup.cfg > setup.cfg
+#sed "s,library_dirs = \(.*\),library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1,g" setup.cfg > setup.cfg
+#sed "s,include_dirs = \(.*\),include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1,g" setup.cfg > setup.cfg
 pip install -U .
 cd ../..
 rm -rf tmpdir
