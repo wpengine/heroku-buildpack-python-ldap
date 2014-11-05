@@ -1,5 +1,5 @@
-# Install python-ldap requirements
-puts-step "Installing python-ldap requirements"
+# Install python-ldap
+puts-step "Installing python-ldap"
 
 GROFF_VERSION=1.21
 GROFF_URL=ftp://ftp.gnu.org/gnu/groff/groff-${GROFF_VERSION}.tar.gz
@@ -78,10 +78,10 @@ echo "Open LDAP enabled." | indent
 echo "Installing python-ldap ..." | indent
 
 mkdir tmpdir
-pip install -d tmpdir python-ldap
+pip install -d tmpdir python-ldap==2.4.17
 cd tmpdir
-tar -zxvf python-ldap-2.4.18.tar.gz > /dev/null
-cd python-ldap-2.4.18
+tar -zxvf python-ldap-2.4.17.tar.gz > /dev/null
+cd python-ldap-2.4.17
 sed "s,library_dirs = \(.*\),library_dirs = $BUILD_DIR/.python-ldap/openldap/lib \1,g" setup.cfg > setup.cfg
 sed "s,include_dirs = \(.*\),include_dirs = $BUILD_DIR/.python-ldap/openldap/include \1,g" setup.cfg > setup.cfg
 pip install -U .
