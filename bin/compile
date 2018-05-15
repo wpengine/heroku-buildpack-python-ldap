@@ -260,6 +260,7 @@ source "$BIN_DIR/steps/mercurial"
 
 # Python-ldap support.
 echo "Test 1." 
+puts-step "test 2"
 source "$BIN_DIR/steps/python-ldap"
 
 # Pylibmc support.
