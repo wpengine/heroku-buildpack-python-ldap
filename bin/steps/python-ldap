@@ -60,7 +60,7 @@ install-python-ldap() {
 }
 
 # If python-ldap exists within requirements, use vendored cryptography.
-if (pip-grep -s requirements.txt python-ldap django-auth-ldap &> /dev/null) then
+#if (pip-grep -s requirements.txt python-ldap django-auth-ldap &> /dev/null) then
 
     puts-step "Noticed python-ldap. Bootstrapping ldap."
 
@@ -146,6 +146,6 @@ if (pip-grep -s requirements.txt python-ldap django-auth-ldap &> /dev/null) then
     echo "Open LDAP enabled." | indent
 
     install-python-ldap $OPENLDAP_BUILD_DIR
-fi
+#fi
 
 bpwatch stop python_ldap
