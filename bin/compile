@@ -258,6 +258,9 @@ source "$BIN_DIR/steps/eggpath-fix"
 # shellcheck source=bin/steps/mercurial
 source "$BIN_DIR/steps/mercurial"
 
+# Python-ldap support.
+source $BIN_DIR/steps/python-ldap
+
 # Pylibmc support.
 # On cedar-14, libmemcached was not available. The buildpack provides its own version, instead.
 # shellcheck source=bin/steps/pylibmc
