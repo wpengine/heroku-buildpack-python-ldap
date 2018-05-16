@@ -74,7 +74,7 @@ install-python-ldap() {
     BERKLEY_CACHE_DIR=${CACHE_DIR}/.python-ldap/lib-berkleydb-${BERKLEY_DB_VERSION}
     BERKLEY_BUILD_DIR=${BUILD_DIR}/.python-ldap/lib-berkleydb-${BERKLEY_DB_VERSION}
 
-    OPENLDAP_VERSION=${OPENLDAP_VERSION:-2.4.46}
+    OPENLDAP_VERSION=${OPENLDAP_VERSION:-2.4.9}
     OPENLDAP_URL=http://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-${OPENLDAP_VERSION}.tgz
     OPENLDAP_CACHE_DIR=${CACHE_DIR}/.python-ldap/lib-openldap-${OPENLDAP_VERSION}
     OPENLDAP_BUILD_DIR=${BUILD_DIR}/.python-ldap/lib-openldap-${OPENLDAP_VERSION}
