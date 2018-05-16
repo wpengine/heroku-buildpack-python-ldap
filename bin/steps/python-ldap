@@ -15,9 +15,11 @@ source $BIN_DIR/utils
 
 python-ldap-version() {
     local PYTHON_LDAP_VERSION=""
+    echo "Getting python LDAP version ..." | indent
     if cat requirements.txt | grep python-ldap ; then
         cat requirements.txt
         PYTHON_LDAP_VERSION=$(cat requirements.txt | grep python-ldap | awk -F '=' '{ print $3 }')
+        echo "Python LDAP version $PYTHON_LDAP_VERSION detected..." | indent
     fi
 
     if [ ! -n $PYTHON_LDAP_VERSION ] || [ ! -f $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz ]; then
@@ -25,8 +27,9 @@ python-ldap-version() {
         if [ -n "$PYTHON_LDAP_VERSION" ]; then
             pip download --quiet -d tmpdir python-ldap==${PYTHON_LDAP_VERSION}
         else
-            pip download --quiet -d tmpdir tmpdir python-ldap
+            pip download --quiet -d tmpdir python-ldap
             PYTHON_LDAP_VERSION=$(ls tmpdir | grep python-ldap | sed 's/python-ldap-\(.*\)\.tar\.gz/\1/g')
+            echo "Python LDAP version $PYTHON_LDAP_VERSION downloaded..." | indent
         fi
 
         cp tmpdir/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz
