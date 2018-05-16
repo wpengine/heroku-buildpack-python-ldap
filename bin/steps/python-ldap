@@ -42,7 +42,8 @@ install-python-ldap() {
     local OPENLDAP_BUILD_DIR=$1
 
     echo "Installing python-ldap ..." | indent
-    local PYTHON_LDAP_VERSION=$(python-ldap-version)
+    python-ldap-version
+    local PYTHON_LDAP_VERSION="3.0.0"
     tar -zxvf $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz > /dev/null
 
     cd python-ldap-${PYTHON_LDAP_VERSION}
