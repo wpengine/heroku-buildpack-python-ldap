@@ -9,9 +9,9 @@
 #
 # This script is invoked by [`bin/compile`](/).
 
+# Syntax sugar.
+# shellcheck source=bin/utils
 source $BIN_DIR/utils
-
-bpwatch start python_ldap
 
 python-ldap-version() {
     local PYTHON_LDAP_VERSION=""
@@ -147,5 +147,3 @@ install-python-ldap() {
 
     install-python-ldap $OPENLDAP_BUILD_DIR
 #fi
-
-bpwatch stop python_ldap

@@ -261,7 +261,6 @@ source "$BIN_DIR/steps/eggpath-fix"
 source "$BIN_DIR/steps/mercurial"
 
 # Python-ldap support.
-puts-step "test 3"
 source "$BIN_DIR/steps/python-ldap"
 
 # Pylibmc support.
