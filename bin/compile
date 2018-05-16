@@ -359,14 +359,14 @@ rm -rf "$CACHE_DIR/.heroku/python-stack"
 rm -rf "$CACHE_DIR/.heroku/vendor"
 rm -rf "$CACHE_DIR/.heroku/src"
 
-mkdir -p "$CACHE_DIR/.heroku"
-cp -R .heroku/python "$CACHE_DIR/.heroku/"
-cp -R .heroku/python-version "$CACHE_DIR/.heroku/"
-cp -R .heroku/python-stack "$CACHE_DIR/.heroku/" &> /dev/null || true
-cp -R .heroku/vendor "$CACHE_DIR/.heroku/" &> /dev/null || true
-if [[ -d .heroku/src ]]; then
-  cp -R .heroku/src "$CACHE_DIR/.heroku/" &> /dev/null || true
-fi
+#mkdir -p "$CACHE_DIR/.heroku"
+#cp -R .heroku/python "$CACHE_DIR/.heroku/"
+#cp -R .heroku/python-version "$CACHE_DIR/.heroku/"
+#cp -R .heroku/python-stack "$CACHE_DIR/.heroku/" &> /dev/null || true
+#cp -R .heroku/vendor "$CACHE_DIR/.heroku/" &> /dev/null || true
+#if [[ -d .heroku/src ]]; then
+#  cp -R .heroku/src "$CACHE_DIR/.heroku/" &> /dev/null || true
+#fi
 
 # Measure the size of the Python installation.
 # shellcheck disable=SC2119
