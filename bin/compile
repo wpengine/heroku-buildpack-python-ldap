@@ -33,8 +33,7 @@ CACHE_DIR=$2
 ENV_DIR=$3
 
 # Export Path variables, for use in sub-scripts.
-#export BUILD_DIR CACHE_DIR ENV_DIR
-export BUILD_DIR ENV_DIR
+export BUILD_DIR CACHE_DIR ENV_DIR
 
 # Set the Buildpack's internet target for downloading Python distributions.
 # The user can provide BUILDPACK_VENDOR_URL to specify a custom target.
@@ -112,8 +111,7 @@ GUNICORN_PROFILE_PATH="$BUILD_DIR/.profile.d/python.gunicorn.sh"
 WEB_CONCURRENCY_PROFILE_PATH="$BUILD_DIR/.profile.d/WEB_CONCURRENCY.sh"
 
 # We'll need to send these statics to other scripts we `source`.
-#export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH EXPORT_PATH
-export BUILD_DIR BIN_DIR PROFILE_PATH EXPORT_PATH
+export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH EXPORT_PATH
 
 # Python Environment Variables
 # Set Python-specific environment variables, for running Python within the buildpack.
