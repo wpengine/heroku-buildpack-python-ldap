@@ -107,11 +107,11 @@ install-python-ldap() {
         echo "Downloading BerkleyDB ${BERKLEY_DB_VERSION} ..." | indent
         curl -s -L -o berkleydb.tar.gz $BERKLEY_DB_URL
         echo "Unpacking ..." | indent
-        tar -zxvf berkleydb.tar.gz > /dev/null
-        rm berkleydb.tar.gz
-        mv db-${BERKLEY_DB_VERSION}.NC $CACHE_DIR/.python-ldap/berkleydb
+        tar -zxvf db-${BERKLEY_DB_VERSION}.tar.gz > /dev/null
+        rm db-${BERKLEY_DB_VERSION}.tar.gz
+        mv db-${BERKLEY_DB_VERSION} $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}
         echo "Configuring ..." | indent
-        cd $CACHE_DIR/.python-ldap/berkleydb/build_unix
+        cd $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}/build_unix
         ../dist/configure --prefix=$BERKLEY_CACHE_DIR > /dev/null
         echo "Compiling ..." | indent
         make > /dev/null
