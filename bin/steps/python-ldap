@@ -15,11 +15,8 @@ source $BIN_DIR/utils
 
 python-ldap-version() {
     local PYTHON_LDAP_VERSION=""
-    echo "Getting python LDAP version ..." | indent
     if cat requirements.txt | grep python-ldap ; then
-        cat requirements.txt
         PYTHON_LDAP_VERSION=$(cat requirements.txt | grep python-ldap | awk -F '=' '{ print $3 }')
-        echo "Python LDAP version $PYTHON_LDAP_VERSION detected..." | indent
     fi
 
     if [ ! -n $PYTHON_LDAP_VERSION ] || [ ! -f $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz ]; then
@@ -29,7 +26,6 @@ python-ldap-version() {
         else
             pip download --quiet -d tmpdir python-ldap
             PYTHON_LDAP_VERSION=$(ls tmpdir | grep python-ldap | sed 's/python-ldap-\(.*\)\.tar\.gz/\1/g')
-            echo "Python LDAP version $PYTHON_LDAP_VERSION downloaded..." | indent
         fi
 
         cp tmpdir/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz
@@ -41,9 +37,11 @@ python-ldap-version() {
 install-python-ldap() {
     local OPENLDAP_BUILD_DIR=$1
 
-    echo "Installing python-ldap ..." | indent
-    python-ldap-version
-    local PYTHON_LDAP_VERSION="3.0.0"
+    echo "Downloading python-ldap ..." | indent
+    
+    local PYTHON_LDAP_VERSION=$(python-ldap-version)
+    echo "Installing python-ldap $PYTHON_LDAP_VERSION..." | indent
+
     tar -zxvf $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz > /dev/null
 
     cd python-ldap-${PYTHON_LDAP_VERSION}
@@ -65,7 +63,7 @@ install-python-ldap() {
 }
 
 # If python-ldap exists within requirements, use vendored cryptography.
-#if (pip-grep -s requirements.txt python-ldap django-auth-ldap &> /dev/null) then
+if (pip-grep -s requirements.txt python-ldap django-auth-ldap &> /dev/null) then
 
     puts-step "Noticed python-ldap. Bootstrapping ldap."
 
@@ -117,7 +115,7 @@ install-python-ldap() {
         mv db-${BERKLEY_DB_VERSION}.NC $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}
         echo "Configuring ..." | indent
         cd $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}/build_unix
-        ../dist/configure --prefix=$BERKLEY_CACHE_DIR > /dev/null
+        ../dist/configure --prefix=$BERKLEY_CACHE_DIR > /dev/null 
         echo "Compiling ..." | indent
         make > /dev/null
         echo "Installing ..." | indent
@@ -151,4 +149,4 @@ install-python-ldap() {
     echo "Open LDAP enabled." | indent
 
     install-python-ldap $OPENLDAP_BUILD_DIR
-#fi
+fi
