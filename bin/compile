@@ -148,23 +148,23 @@ cd "$BUILD_DIR"
 # - Once the build is complete, `~/.heroku/{known-paths}` is copied back into the cache.
 
 # Create the cache directory, if it doesn't exist.
-#mkdir -p "$CACHE_DIR"
+mkdir -p "$CACHE_DIR"
 
 # Restore old artifacts from the cache.
-#mkdir -p .heroku
+mkdir -p .heroku
 
 # The Python installation.
-#cp -R "$CACHE_DIR/.heroku/python" .heroku/ &> /dev/null || true
+cp -R "$CACHE_DIR/.heroku/python" .heroku/ &> /dev/null || true
 # A plain text file which contains the current stack being used (used for cache busting).
-#cp -R "$CACHE_DIR/.heroku/python-stack" .heroku/ &> /dev/null || true
+cp -R "$CACHE_DIR/.heroku/python-stack" .heroku/ &> /dev/null || true
 # A plain text file which contains the current python version being used (used for cache busting).
-#cp -R "$CACHE_DIR/.heroku/python-version" .heroku/ &> /dev/null || true
+cp -R "$CACHE_DIR/.heroku/python-version" .heroku/ &> /dev/null || true
 # Any pre-compiled binaries, provided by the buildpack.
-#cp -R "$CACHE_DIR/.heroku/vendor" .heroku/ &> /dev/null || true
+cp -R "$CACHE_DIR/.heroku/vendor" .heroku/ &> /dev/null || true
 # "editable" installations of code repositories, via pip or pipenv.
-#if [[ -d "$CACHE_DIR/.heroku/src" ]]; then
-#  cp -R "$CACHE_DIR/.heroku/src" .heroku/ &> /dev/null || true
-#fi
+if [[ -d "$CACHE_DIR/.heroku/src" ]]; then
+  cp -R "$CACHE_DIR/.heroku/src" .heroku/ &> /dev/null || true
+fi
 
 # The pre_compile hook. Customers rely on this. Don't remove it.
 # This part of the code is used to allow users to customize their build experience
@@ -177,16 +177,16 @@ source "$BIN_DIR/steps/hooks/pre_compile"
 # Sticky runtimes. If there was a previous build, and it used a given version of Python,
 # continue to use that version of Python in perpituity (warnings will be raised if
 # they are out–of–date).
-#if [ -f "$CACHE_DIR/.heroku/python-version" ]; then
-#  DEFAULT_PYTHON_VERSION=$(cat "$CACHE_DIR/.heroku/python-version")
-#fi
+if [ -f "$CACHE_DIR/.heroku/python-version" ]; then
+  DEFAULT_PYTHON_VERSION=$(cat "$CACHE_DIR/.heroku/python-version")
+fi
 
 # We didn't always record the stack version. This code is in place because of that.
-#if [ -f "$CACHE_DIR/.heroku/python-stack" ]; then
-#  CACHED_PYTHON_STACK=$(cat "$CACHE_DIR/.heroku/python-stack")
-#else
-#  CACHED_PYTHON_STACK=$STACK
-#fi
+if [ -f "$CACHE_DIR/.heroku/python-stack" ]; then
+  CACHED_PYTHON_STACK=$(cat "$CACHE_DIR/.heroku/python-stack")
+else
+  CACHED_PYTHON_STACK=$STACK
+fi
 
 #export CACHED_PYTHON_STACK
 
@@ -359,14 +359,14 @@ rm -rf "$CACHE_DIR/.heroku/python-stack"
 rm -rf "$CACHE_DIR/.heroku/vendor"
 rm -rf "$CACHE_DIR/.heroku/src"
 
-#mkdir -p "$CACHE_DIR/.heroku"
-#cp -R .heroku/python "$CACHE_DIR/.heroku/"
-#cp -R .heroku/python-version "$CACHE_DIR/.heroku/"
-#cp -R .heroku/python-stack "$CACHE_DIR/.heroku/" &> /dev/null || true
-#cp -R .heroku/vendor "$CACHE_DIR/.heroku/" &> /dev/null || true
-#if [[ -d .heroku/src ]]; then
-#  cp -R .heroku/src "$CACHE_DIR/.heroku/" &> /dev/null || true
-#fi
+mkdir -p "$CACHE_DIR/.heroku"
+cp -R .heroku/python "$CACHE_DIR/.heroku/"
+cp -R .heroku/python-version "$CACHE_DIR/.heroku/"
+cp -R .heroku/python-stack "$CACHE_DIR/.heroku/" &> /dev/null || true
+cp -R .heroku/vendor "$CACHE_DIR/.heroku/" &> /dev/null || true
+if [[ -d .heroku/src ]]; then
+  cp -R .heroku/src "$CACHE_DIR/.heroku/" &> /dev/null || true
+fi
 
 # Measure the size of the Python installation.
 # shellcheck disable=SC2119
