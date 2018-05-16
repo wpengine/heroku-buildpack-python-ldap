@@ -16,15 +16,16 @@ source $BIN_DIR/utils
 python-ldap-version() {
     local PYTHON_LDAP_VERSION=""
     if cat requirements.txt | grep python-ldap ; then
+        cat requirements.txt
         PYTHON_LDAP_VERSION=$(cat requirements.txt | grep python-ldap | awk -F '=' '{ print $3 }')
     fi
 
     if [ ! -n $PYTHON_LDAP_VERSION ] || [ ! -f $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz ]; then
         mkdir tmpdir
         if [ -n "$PYTHON_LDAP_VERSION" ]; then
-            pip install --quiet download tmpdir python-ldap==${PYTHON_LDAP_VERSION}
+            pip download --quiet -d tmpdir python-ldap==${PYTHON_LDAP_VERSION}
         else
-            pip install --quiet download tmpdir python-ldap
+            pip download --quiet -d tmpdir tmpdir python-ldap
             PYTHON_LDAP_VERSION=$(ls tmpdir | grep python-ldap | sed 's/python-ldap-\(.*\)\.tar\.gz/\1/g')
         fi
 
