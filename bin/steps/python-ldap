@@ -69,8 +69,8 @@ install-python-ldap() {
     GROFF_CACHE_DIR=${CACHE_DIR}/.python-ldap/lib-groff-${GROFF_VERSION}
     GROFF_BUILD_DIR=${BUILD_DIR}/.python-ldap/lib-groff-${GROFF_VERSION}
 
-    BERKLEY_DB_VERSION=${BERKLEY_DB_VERSION:-6.2.28}
-    BERKLEY_DB_URL=http://download.oracle.com/berkeley-db/db-${BERKLEY_DB_VERSION}.tar.gz
+    BERKLEY_DB_VERSION=${BERKLEY_DB_VERSION:-6.2.32}
+    BERKLEY_DB_URL=https://fossies.org/linux/misc/db-${BERKLEY_DB_VERSION}.tar.gz
     BERKLEY_CACHE_DIR=${CACHE_DIR}/.python-ldap/lib-berkleydb-${BERKLEY_DB_VERSION}
     BERKLEY_BUILD_DIR=${BUILD_DIR}/.python-ldap/lib-berkleydb-${BERKLEY_DB_VERSION}
 
