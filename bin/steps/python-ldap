@@ -22,9 +22,9 @@ python-ldap-version() {
     if [ ! -n $PYTHON_LDAP_VERSION ] || [ ! -f $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz ]; then
         mkdir tmpdir
         if [ -n "$PYTHON_LDAP_VERSION" ]; then
-            pip install --quiet --download tmpdir python-ldap==${PYTHON_LDAP_VERSION}
+            pip install --quiet download tmpdir python-ldap==${PYTHON_LDAP_VERSION}
         else
-            pip install --quiet --download tmpdir python-ldap
+            pip install --quiet download tmpdir python-ldap
             PYTHON_LDAP_VERSION=$(ls tmpdir | grep python-ldap | sed 's/python-ldap-\(.*\)\.tar\.gz/\1/g')
         fi
 
