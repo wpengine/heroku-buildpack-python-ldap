@@ -69,8 +69,8 @@ install-python-ldap() {
     GROFF_CACHE_DIR=${CACHE_DIR}/.python-ldap/lib-groff-${GROFF_VERSION}
     GROFF_BUILD_DIR=${BUILD_DIR}/.python-ldap/lib-groff-${GROFF_VERSION}
 
-    BERKLEY_DB_VERSION=${BERKLEY_DB_VERSION:-6.2.32}
-    BERKLEY_DB_URL=https://fossies.org/linux/misc/db-${BERKLEY_DB_VERSION}.tar.gz
+    BERKLEY_DB_VERSION=${BERKLEY_DB_VERSION:-5.3.28}
+    BERKLEY_DB_URL=http://download.oracle.com/berkeley-db/db-${BERKLEY_DB_VERSION}.NC.tar.gz
     BERKLEY_CACHE_DIR=${CACHE_DIR}/.python-ldap/lib-berkleydb-${BERKLEY_DB_VERSION}
     BERKLEY_BUILD_DIR=${BUILD_DIR}/.python-ldap/lib-berkleydb-${BERKLEY_DB_VERSION}
 
@@ -109,7 +109,7 @@ install-python-ldap() {
         echo "Unpacking ..." | indent
         tar -zxvf berkleydb.tar.gz > /dev/null
         rm berkleydb.tar.gz
-        mv db-${BERKLEY_DB_VERSION} $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}
+        mv db-${BERKLEY_DB_VERSION}.NC $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}
         echo "Configuring ..." | indent
         cd $CACHE_DIR/.python-ldap/berkleydb-${BERKLEY_DB_VERSION}/build_unix
         ../dist/configure --prefix=$BERKLEY_CACHE_DIR > /dev/null
