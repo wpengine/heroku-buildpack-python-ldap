@@ -15,8 +15,8 @@ source $BIN_DIR/utils
 
 python-ldap-version() {
     local PYTHON_LDAP_VERSION=""
-    if cat requirements.txt | grep python-ldap ; then
-        PYTHON_LDAP_VERSION=$(cat requirements.txt | grep python-ldap | awk -F '=' '{ print $3 }')
+    if cat requirements.txt | grep python-ldap &> /dev/null ; then
+        PYTHON_LDAP_VERSION=$(cat requirements.txt | grep python-ldap | awk -F '==' '{ print $2 }')
     fi
 
     if [ ! -n $PYTHON_LDAP_VERSION ] || [ ! -f $CACHE_DIR/.python-ldap/python-ldap-${PYTHON_LDAP_VERSION}.tar.gz ]; then
